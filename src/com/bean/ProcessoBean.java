@@ -2,6 +2,8 @@ package com.bean;
 
 import javax.faces.bean.ManagedBean;
 
+import com.modelo.Processo;
+
 @ManagedBean
 public class ProcessoBean {
 	
