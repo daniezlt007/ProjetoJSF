@@ -2,21 +2,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Index</title>
-</head>
-<body>
+<h:body>
 	<h:form>
-		Index
-		<h:outputLabel value="#{controle.mensagem}"/>
-		<h:commandButton action="sobre" value="Sobre...Navegação Estática"/><br/>
-		<h:commandLink action="#{controle.sobre()}" value="sobre...Navegação Dinâmica"/><br/>
-		<h:commandLink action="#{controle.redirecionadoSobre()}" value="sobre...Navegação Dinâmica"/>
+		<h1>Novo Processo</h1>
+		<fieldset>
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Número Processo" for="nmprocesso"/>
+				<p:inputText id="nmprocesso" value="#{processoBean.processo.numProcesso}"/>
+				<p:outputLabel value="Responsável" for="responsavel"/>
+				<p:inputText id="responsavel" value="#{processoBean.processo.responsavel}"/>
+				<p:outputLabel value="Número OPS" for="ops"/>
+				<p:inputText id="ops" value="#{processoBean.processo.numOps}"/>
+				<p:outputLabel value="Número Carta Contrato" for="cartacontrato"/>
+				<p:inputText id="cartacontrato" value="#{processoBean.processo.numCartaContrato}"/>
+								
+				<p:commandButton value="Gravar" action="#{processoBean.gravar}"/>
+				
+			</p:panelGrid>
+		</fieldset>
 	</h:form>
-	<p:inputText/>
-</body>
+</h:body>	
 </html>
+<!-- xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" -->
