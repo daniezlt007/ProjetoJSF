@@ -7,16 +7,20 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:body>
 	<h:form>
+		<h:messages/>
 		<h1>Novo Processo</h1>
 		<fieldset>
 			<legend>Processo</legend>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Número Processo" for="nmprocesso"/>
-					<h:inputText id="nmprocesso" value="#{processoBean.processo.numProcesso}"/>
+					<h:inputText id="nmprocesso" value="#{processoBean.processo.numProcesso}" required="true" 
+					requiredMessage="O Número do Processo é Obrigatório" validatorMessage="O campo permite somente 10 caracteres">
+						<f:validateLength maximum="10"/>
+					</h:inputText>
 					<h:outputLabel value="Número OPS" for="ops"/>
-					<h:inputText id="ops" value="#{processoBean.processo.numOps}"/>
+					<h:inputText id="ops" value="#{processoBean.processo.numOps}" required="true" requiredMessage="Número da OPS é obrigatório"/>
 					<h:outputLabel value="Número Carta Contrato" for="cartacontrato"/>
-					<h:inputText id="cartacontrato" value="#{processoBean.processo.numCartaContrato}"/>
+					<h:inputText id="cartacontrato" value="#{processoBean.processo.numCartaContrato}" required="true" requiredMessage="Número da Carta Contrato é obrigatório"/>
 				</h:panelGrid>
 		</fieldset>
 		<fieldset>
@@ -27,12 +31,10 @@
 						<f:selectItems value="#{processoBean.responsaveis}" var="responsavel"
 							itemLabel="#{responsavel.nome}" itemValue="#{responsavel.id}"/>
 					</h:selectOneMenu>
-					<h:commandButton value="Gravar Responsável"/>
+					<h:commandButton value="Gravar Responsável" action="#{processoBean.gravarResponsavel}"/>
 				</h:panelGrid>
 		</fieldset>
 		<h:commandButton value="Gravar" action="#{processoBean.gravar}"/>		
 	</h:form>
 </h:body>	
 </html>
-<!-- xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets" -->

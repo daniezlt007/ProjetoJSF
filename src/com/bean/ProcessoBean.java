@@ -69,7 +69,7 @@ public class ProcessoBean {
 
 		if (this.processo.getId() == null) {
 			new DAO<Processo>(Processo.class).adiciona(this.processo);
-			carregarProcessoPelaId();
+			//carregarProcessoPelaId();
 		} else {
 			new DAO<Processo>(Processo.class).atualiza(this.processo);
 		}
