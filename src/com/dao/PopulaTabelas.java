@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 
 import com.modelo.Processo;
 import com.modelo.Responsavel;
+import com.modelo.Usuario;
 
 public class PopulaTabelas {
 	public static void main(String[] args) {
@@ -14,6 +15,10 @@ public class PopulaTabelas {
 		em.getTransaction().begin();
 
 		// Criando Objetos
+		
+		Usuario developer = geraUsuario("danielzt007@outlook.com", "root");
+		em.persist(developer);
+		
 		Responsavel daniel = geraResponsavel("Daniel da Silva", 1001);
 		em.persist(daniel);
 
@@ -44,5 +49,12 @@ public class PopulaTabelas {
 		processo.setNumCartaContrato(numCartaContrato);
 		processo.adicionarResponsavel(responsavel);
 		return processo;
+	}
+	
+	public static Usuario geraUsuario(String email, String senha){
+		Usuario usuario = new Usuario();
+		usuario.setEmail(email);
+		usuario.setSenha(senha);
+		return usuario;
 	}
 }

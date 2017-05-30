@@ -82,7 +82,7 @@ public class ProcessoBean {
 	}
 	
 	public void remover(Processo processo){
-		System.out.println("Gravando" + processo.getNumProcesso());
+		System.out.println("Removendo" + processo.getNumProcesso());
 		new DAO<Processo>(Processo.class).remove(this.processo);
 	}
 	

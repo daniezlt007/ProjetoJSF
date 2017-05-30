@@ -4,7 +4,7 @@
 		
 		<class>com.modelo.Responsavel</class>
 		<class>com.modelo.Processo</class>
-		<!--  <class>com.modelo.Usuario</class>-->
+		<class>com.modelo.Usuario</class>
 		
 		<properties>
 			<property name="hibernate.connection.driver_class" value="org.gjt.mm.mysql.Driver"/>

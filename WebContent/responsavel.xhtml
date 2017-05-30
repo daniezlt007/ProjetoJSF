@@ -5,7 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<h:body>
+<ui:composition template="_template.xhtml">
+	<ui:define name="conteudo">
 		<h:form id="responsavel">
 			<h1>Novo Responsavel</h1>
 			<fieldset>
@@ -20,7 +21,8 @@
 				</h:panelGrid>
 			</fieldset>
 		</h:form>
-</h:body>
+	</ui:define>
+</ui:composition>
 </html>
 <!-- xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets" -->

@@ -1,40 +1,99 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<h:body>
-	<h:form>
-		<h:messages/>
-		<h1>Novo Processo</h1>
-		<fieldset>
-			<legend>Processo</legend>
+<h:head />
+<ui:composition template="_template.xhtml">
+	<ui:define name="titulo">
+				Novo Processo
+		</ui:define>
+	<ui:define name="conteudo">
+		<h:form>
+			
+			<p:messages id="messages" autoUpdate="true"/>
+			<p:growl autoUpdate="true"/>
+			<p:fieldset legend="Dados do Processo">
 				<h:panelGrid columns="2">
-					<h:outputLabel value="Número Processo" for="nmprocesso"/>
-					<h:inputText id="nmprocesso" value="#{processoBean.processo.numProcesso}" required="true" 
-					requiredMessage="O Número do Processo é Obrigatório" validatorMessage="O campo permite somente 10 caracteres">
-						<f:validateLength maximum="10"/>
-					</h:inputText>
-					<h:outputLabel value="Número OPS" for="ops"/>
-					<h:inputText id="ops" value="#{processoBean.processo.numOps}" required="true" requiredMessage="Número da OPS é obrigatório"/>
-					<h:outputLabel value="Número Carta Contrato" for="cartacontrato"/>
-					<h:inputText id="cartacontrato" value="#{processoBean.processo.numCartaContrato}" required="true" requiredMessage="Número da Carta Contrato é obrigatório"/>
+					<h:outputLabel value="Número Processo" for="nmprocesso" />
+					<p:inputText id="nmprocesso"
+						value="#{processoBean.processo.numProcesso}" required="true"
+						requiredMessage="O Número do Processo é Obrigatório"
+						validatorMessage="O campo permite somente 10 caracteres">
+						<f:validateLength maximum="10" />
+						<f:ajax event="blur" />
+					</p:inputText>
+					<h:outputLabel value="Número OPS" for="ops" />
+					<p:inputText id="ops" value="#{processoBean.processo.numOps}"
+						required="true" requiredMessage="Número da OPS é obrigatório" />
+					<h:outputLabel value="Número Carta Contrato" for="cartacontrato" />
+					<p:inputText id="cartacontrato"
+						value="#{processoBean.processo.numCartaContrato}" required="true"
+						requiredMessage="Número da Carta Contrato é obrigatório" />
 				</h:panelGrid>
-		</fieldset>
-		<fieldset>
-			<legend>Responsável</legend>
+			</p:fieldset>
+			<p:fieldset legend="Dados do Responsável">
 				<h:panelGrid columns="2">
-					<h:outputLabel value="Selecione o Responsável" for="responsavel"/>
-					<h:selectOneMenu value="#{processoBean.responsavelId}" id="responsavel">
-						<f:selectItems value="#{processoBean.responsaveis}" var="responsavel"
-							itemLabel="#{responsavel.nome}" itemValue="#{responsavel.id}"/>
-					</h:selectOneMenu>
-					<h:commandButton value="Gravar Responsável" action="#{processoBean.gravarResponsavel}"/>
+					<h:outputLabel value="Selecione" for="responsavel" />
+					<h:commandLink value="ou cadastre novo autor"					
+						action="#{processoBean.formResponsavel}" immediate="true" />
+						<br />
+					<p:selectOneMenu value="#{processoBean.responsavelId}"
+						id="responsavel">
+						<f:selectItems value="#{processoBean.responsaveis}"
+							var="responsavel" itemLabel="#{responsavel.nome}"
+							itemValue="#{responsavel.id}" />
+					</p:selectOneMenu>
+					<br />
+					<p:commandButton value="Gravar Responsável"
+						action="#{processoBean.gravarResponsavel}" process="@this responsavel" 
+						update="tabelaProcessos" />
+					<br /><br />
+					
+
+					<p:dataTable value="#{processoBean.responsaveisDoProcesso}"
+						var="responsavel" id="tabelaProcessos" emptyMessage="Nenhum Responsável Associado">
+						<p:column>
+							<h:outputText value="#{responsavel.nome}" />
+						</p:column>
+					</p:dataTable>
 				</h:panelGrid>
-		</fieldset>
-		<h:commandButton value="Gravar" action="#{processoBean.gravar}"/>		
-	</h:form>
-</h:body>	
+				<p:commandButton value="Gravar" action="#{processoBean.gravar}">
+				<f:ajax execute="@form"
+					render="@form :formTabelaProcessos:tabelaProcessos" />
+			</p:commandButton>
+			</p:fieldset>
+			
+		</h:form>
+		<h:form id="formTabelaProcessos">
+			<p:dataTable value="#{processoBean.processos}" var="processo"
+				id="tabelaProcessos" paginator="true" rows="4">
+				<p:column>
+					<f:facet name="header">Número Processo</f:facet>
+					<h:outputText value="#{processo.numProcesso}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Número OPS</f:facet>
+					<h:outputText value="#{processo.numOps}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Número Carta Contrato</f:facet>
+					<h:outputText value="#{processo.numCartaContrato}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Alterar</f:facet>
+					<h:commandLink value="Alterar"
+						action="#{processoBean.carregarProcesso(processo)}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Remover</f:facet>
+					<h:commandLink value="Remover"
+						action="#{processoBean.remover(processo)}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>
