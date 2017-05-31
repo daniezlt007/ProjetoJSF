@@ -12,9 +12,8 @@
 		</ui:define>
 	<ui:define name="conteudo">
 		<h:form>
-			
-			<p:messages id="messages" autoUpdate="true"/>
-			<p:growl autoUpdate="true"/>
+			<p:messages id="messages" autoUpdate="true" />
+			<p:growl autoUpdate="true" />
 			<p:fieldset legend="Dados do Processo">
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Número Processo" for="nmprocesso" />
@@ -36,10 +35,10 @@
 			</p:fieldset>
 			<p:fieldset legend="Dados do Responsável">
 				<h:panelGrid columns="2">
-					<h:outputLabel value="Selecione" for="responsavel" />
-					<h:commandLink value="ou cadastre novo autor"					
+					<p:outputLabel value="Selecione" for="responsavel" />
+					<h:commandLink value="ou cadastre novo autor"
 						action="#{processoBean.formResponsavel}" immediate="true" />
-						<br />
+					<br />
 					<p:selectOneMenu value="#{processoBean.responsavelId}"
 						id="responsavel">
 						<f:selectItems value="#{processoBean.responsaveis}"
@@ -48,24 +47,26 @@
 					</p:selectOneMenu>
 					<br />
 					<p:commandButton value="Gravar Responsável"
-						action="#{processoBean.gravarResponsavel}" process="@this responsavel" 
-						update="tabelaProcessos" />
-					<br /><br />
-					
+						action="#{processoBean.gravarResponsavel}"
+						process="@this responsavel" update="tabelaProcessos" />
+					<br />
+					<br />
+
 
 					<p:dataTable value="#{processoBean.responsaveisDoProcesso}"
-						var="responsavel" id="tabelaProcessos" emptyMessage="Nenhum Responsável Associado">
+						var="responsavel" id="tabelaProcessos"
+						emptyMessage="Nenhum Responsável Associado">
 						<p:column>
 							<h:outputText value="#{responsavel.nome}" />
 						</p:column>
 					</p:dataTable>
 				</h:panelGrid>
 				<p:commandButton value="Gravar" action="#{processoBean.gravar}">
-				<f:ajax execute="@form"
-					render="@form :formTabelaProcessos:tabelaProcessos" />
-			</p:commandButton>
+					<f:ajax execute="@form"
+						render="@form :formTabelaProcessos:tabelaProcessos" />
+				</p:commandButton>
 			</p:fieldset>
-			
+
 		</h:form>
 		<h:form id="formTabelaProcessos">
 			<p:dataTable value="#{processoBean.processos}" var="processo"

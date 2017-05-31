@@ -20,6 +20,10 @@ public class ResponsavelBean {
 		return responsavel;
 	}
 	
+	public List<Responsavel> getResponsaveis() {
+		return new DAO<Responsavel>(Responsavel.class).listaTodos();
+	}
+	
 	public String gravar(){
 			
 		System.out.println("Gravando Responsavel " + this.responsavel.getNome());

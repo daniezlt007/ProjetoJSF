@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/_template.xhtml">
+		
+		<ui:define name="titulo">
+				Login
+		</ui:define>
+
+		<ui:define name="conteudo">
+		
+			<h:messages globalOnly="true" />
+			
+			<h:form id="login">
+				<p:fieldset>
+					<legend>Login</legend>
+					<h:panelGrid columns="3">
+					
+						<h:outputLabel value="Email:" for="email" />
+						<p:inputText id="email" value="#{loginBean.usuario.email}"
+							required="true">
+							<f:passThroughAttribute name="type" value="email" />
+							
+						</p:inputText>
+						
+						<h:message for="email" id="messageEmail" />
+
+						<h:outputLabel value="Senha:" for="senha" />
+						<p:inputText id="senha" value="#{loginBean.usuario.senha}"
+							required="true">
+							<f:passThroughAttribute name="type" value="password" />
+						</p:inputText>
+						
+						<h:message for="senha" id="messageSenha" />
+
+						<p:commandButton value="Efetuar Login" action="#{loginBean.efetuaLogin}" />
+					</h:panelGrid>
+				</p:fieldset>
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+
+</html>

@@ -6,20 +6,47 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="_template.xhtml">
+	<ui:define name="titulo">
+				Novo Responsável
+		</ui:define>
 	<ui:define name="conteudo">
 		<h:form id="responsavel">
-			<h1>Novo Responsavel</h1>
-			<fieldset>
+			<p:messages id="messages" autoUpdate="true"/>
+			<p:growl autoUpdate="true"/>
+			<p:fieldset legend="Dados do Processo">
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Nome Responsável" for="nm_nome" />
-					<h:inputText id="nm_nome"
+					<p:inputText id="nm_nome"
 						value="#{responsavelBean.responsavel.nome}" />
 					<h:outputLabel value="Matrícula" for="nm_matricula" />
-					<h:inputText id="nm_matricula"
+					<p:inputText id="nm_matricula"
 						value="#{responsavelBean.responsavel.matricula}" />
-					<h:commandButton value="Gravar" action="#{responsavelBean.gravar}" />
+					<p:commandButton value="Gravar" action="#{responsavelBean.gravar}" />
 				</h:panelGrid>
-			</fieldset>
+			</p:fieldset>
+		</h:form>
+		<h:form id="formTabelaResponsavel">
+			<p:dataTable value="#{responsavelBean.responsaveis}" var="responsavel"
+				id="tabelaResponsaveis" paginator="true" rows="4">
+				<p:column>
+					<f:facet name="header">Matrícula</f:facet>
+					<h:outputText value="#{responsavel.matricula}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Nome Responsável</f:facet>
+					<h:outputText value="#{responsavel.nome}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Alterar</f:facet>
+					<h:commandLink value="Alterar"
+						action="#{responsavelBean.carregar(responsavel)}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Remover</f:facet>
+					<h:commandLink value="Remover"
+						action="#{responsavelBean.remover(responsavel)}" />
+				</p:column>
+			</p:dataTable>
 		</h:form>
 	</ui:define>
 </ui:composition>
