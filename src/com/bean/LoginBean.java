@@ -27,16 +27,15 @@ public class LoginBean {
 
 		if (existe) {
 
-			context.getExternalContext().getSessionMap()
-					.put("usuarioLogado", this.usuario);
+			context.getExternalContext().getSessionMap().put("usuarioLogado", this.usuario);
 
-			return "livro?faces-redirect=true";
+			return "processo?faces-redirect=true";
 		}
 		
 		context.getExternalContext().getFlash().setKeepMessages(true);
 		context.addMessage(null, new FacesMessage("Usuário não encontrado"));
 
-		return "login?faces-redirect=true";
+		return "processo?faces-redirect=true";
 	}
 
 	public String deslogar() {
